@@ -1,20 +1,22 @@
 pipeline {
-    agent any
-    stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/ShaktiSahoo92/git-practice.git'
-            }
-        }
-        stage('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-    }
+    agent any
+
+    tools {
+        maven 'Maven-3'
+    }
+
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -version'
+                sh 'mvn clean package'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+    }
 }
